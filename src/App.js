@@ -20,9 +20,12 @@ function App() {
     const userMsg = { sender: "user", text: input, time: currentTimestamp() };
     setMessages((prev) => [...prev, userMsg]);
 
-    const res = await axios.post("http://localhost:5000/chat", {
-      question: input,
-    });
+    const res = await axios.post(
+      "https://ai-assistant-backend-wpmw.onrender.com/api/chat",
+      {
+        question: input,
+      }
+    );
     const botMsg = {
       sender: "bot",
       text: res.data.answer,
@@ -39,13 +42,11 @@ function App() {
       source: "admin", // optional
     };
     const response = await axios.post(
-      "http://localhost:5000/api/upload-doc",
+      "https://ai-assistant-backend-wpmw.onrender.com/api/upload-doc",
       docData
     );
     toast.success(response.data.message);
   };
-
-  console.log(messages);
 
   return (
     <div>
